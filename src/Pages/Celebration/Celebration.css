@@ -1,0 +1,7 @@
+.whiteText {
+  color: white !important;
+  font-size: large !important ;
+}
+.whiteText .ant-tabs {
+  color: white !important;
+}

@@ -1,8 +1,12 @@
-import { deleteParty } from "../../../redux/feature/celebrationSlice";
+import {
+  completeTask,
+  deleteParty,
+} from "../../../redux/feature/celebrationSlice";
 import { useAppDispatch } from "../../../redux/hook";
 import { ICelebratin } from "../../../Types/Celebration";
 import { Trash2 } from "lucide-react";
 import UpdateCelebration from "../UpdateCelebration/UpdateCelebration";
+import { ChangeEvent, useState } from "react";
 
 interface Iprops {
   celebration: ICelebratin;
@@ -13,6 +17,12 @@ const CelebrationCard = ({ celebration }: Iprops) => {
 
   const dispatch = useAppDispatch();
 
+  const [checked, setChecked] = useState(false);
+  const handleTask = (event: ChangeEvent<HTMLInputElement>) => {
+    setChecked(event.target.checked);
+    dispatch(completeTask({ id, checked }));
+  };
+  // console.log(checked);
   return (
     <div className="border p-2 rounded-md shadow-white shadow-md">
       <div className="flex justify-between mb-4">
@@ -30,7 +40,14 @@ const CelebrationCard = ({ celebration }: Iprops) => {
           <span>({category})</span>
         </div>
         <div className="flex items-center gap-2">
-          <input type="checkbox" name="" id="" className="size-5" />
+          <input
+            type="checkbox"
+            name=""
+            id=""
+            className="size-5"
+            checked={checked}
+            onChange={handleTask}
+          />
           <Trash2
             className="text-red-500"
             onClick={() => dispatch(deleteParty(id))}
