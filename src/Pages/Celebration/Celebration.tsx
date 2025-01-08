@@ -4,7 +4,7 @@ import AddCelebration from "./AddCelebration/AddCelebration";
 
 const Celebration = () => {
   const { celebrations } = useAppSelector((state) => state.celebration);
-  console.log(celebrations);
+  //   console.log(celebrations);
 
   return (
     <div>

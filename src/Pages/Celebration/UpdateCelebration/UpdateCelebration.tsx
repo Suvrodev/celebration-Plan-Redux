@@ -1,11 +1,21 @@
-import { Button, Modal } from "antd";
 import { ChangeEvent, useState } from "react";
-import { useDispatch } from "react-redux";
-import { addParty } from "../../../redux/feature/celebrationSlice";
-import { ICelebratin, TCategoty, TStatus } from "../../../Types/Celebration";
+import {
+  ICelebratin as ICelebraton,
+  TCategoty,
+  TStatus,
+} from "../../../Types/Celebration";
+import { useAppDispatch } from "../../../redux/hook";
+import { Button, Modal } from "antd";
+import { updateParty } from "../../../redux/feature/celebrationSlice";
+import { SquarePen } from "lucide-react";
 
-const AddCelebration = () => {
-  const dispatch = useDispatch();
+interface Iprops {
+  celebration: ICelebraton;
+}
+const UpdateCelebration = ({ celebration }: Iprops) => {
+  //   console.log("celebrationnnn(Updare): ", celebration);
+  const { id, category, deadline, description, status, title } = celebration;
+  const dispatch = useAppDispatch();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -24,8 +34,10 @@ const AddCelebration = () => {
   const statuses: TStatus[] = ["In-progress", "Pending", "Completed"];
   const categories: TCategoty[] = ["Family Time", "BBQ Party", "Games"];
 
-  const [selectCategory, setSelectCategory] = useState<TCategoty | "">("");
-  const [selectedStatus, setSelectedStatus] = useState<TStatus | "">("");
+  const [selectCategory, setSelectCategory] = useState<TCategoty | "">(
+    category
+  );
+  const [selectedStatus, setSelectedStatus] = useState<TStatus | "">(status);
 
   const handleStatus = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedStatus(event.target.value as TStatus);
@@ -34,6 +46,7 @@ const AddCelebration = () => {
   const handleCategory = (event: ChangeEvent<HTMLSelectElement>) => {
     setSelectCategory(event.target.value as TCategoty);
   };
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const Form = event.target as HTMLFormElement;
@@ -49,7 +62,7 @@ const AddCelebration = () => {
       status: selectedStatus,
     };
     console.log(formData);
-    dispatch(addParty(formData as ICelebratin));
+    dispatch(updateParty({ id, formData }));
     Form.reset();
     handleOk();
   };
@@ -57,10 +70,10 @@ const AddCelebration = () => {
   return (
     <div className="bg-yellow-400">
       <Button type="primary" onClick={showModal}>
-        Add Celebration
+        <SquarePen />
       </Button>
       <Modal
-        title="Add Celebration"
+        title="Update Celebration"
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
@@ -73,6 +86,7 @@ const AddCelebration = () => {
             name="titlee"
             id=""
             placeholder="Party Title"
+            defaultValue={title}
             className="bg-transparent py-2 px-4 border-4 rounded-md outline-0 w-full "
           />
 
@@ -81,6 +95,7 @@ const AddCelebration = () => {
             name="description"
             id=""
             placeholder="Party Title"
+            defaultValue={description}
             className="bg-transparent py-2 px-4 border-4 rounded-md outline-0 w-full"
           />
 
@@ -123,6 +138,7 @@ const AddCelebration = () => {
             name="deadline"
             id=""
             className="bg-slate-400  py-2 px-4 border-4 rounded-md outline-0"
+            defaultValue={deadline}
           />
 
           <div className="mt-4">
@@ -136,4 +152,4 @@ const AddCelebration = () => {
   );
 };
 
-export default AddCelebration;
+export default UpdateCelebration;
