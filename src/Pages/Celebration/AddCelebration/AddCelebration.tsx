@@ -59,8 +59,11 @@ const AddCelebration = () => {
   };
 
   return (
-    <div className="bg-yellow-400">
-      <Button type="primary" onClick={showModal}>
+    <div className="">
+      <Button
+        className="bg-purple-600  text-white border-0"
+        onClick={showModal}
+      >
         Add Celebration
       </Button>
       <Modal

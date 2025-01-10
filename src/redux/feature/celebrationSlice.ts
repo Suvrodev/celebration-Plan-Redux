@@ -1,3 +1,4 @@
+import { retriveFromLocalStorage } from "./../../utilities/retriveFromLocalStorage";
 import { createSlice, nanoid, PayloadAction } from "@reduxjs/toolkit";
 import { ICelebration } from "../../Types/CelebrationType";
 import { setLocalStorage } from "../../utilities/setLocalStorage";
@@ -126,6 +127,18 @@ export const celebrationSlice = createSlice({
         }
       }
     },
+    categoryFilterAction: (state, action) => {
+      const categoryName = action.payload;
+      console.log("Category Name: ", categoryName);
+      const allData: ICelebration[] = retriveFromLocalStorage();
+      if (categoryName === "All") {
+        state.celebrations = [...allData];
+      } else {
+        state.celebrations = allData.filter(
+          (data) => data.category === categoryName
+        );
+      }
+    },
   },
 });
 
@@ -135,5 +148,6 @@ export const {
   updateParty,
   completeTask,
   statusFilterAction,
+  categoryFilterAction,
 } = celebrationSlice.actions;
 export default celebrationSlice.reducer;
