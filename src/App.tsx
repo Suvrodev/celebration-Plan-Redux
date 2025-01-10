@@ -1,14 +1,12 @@
 import "./App.css";
-import Header from "./Pages/Shared/Header";
 import { useAppSelector } from "./redux/hook";
 
 function App() {
   const { celebrations } = useAppSelector((state) => state.celebration);
   console.log(celebrations);
   return (
-    <main>
-      <Header />
-      <div></div>
+    <main className="w-full h-screen bg-green-600">
+      <h1>This is Main</h1>
     </main>
   );
 }

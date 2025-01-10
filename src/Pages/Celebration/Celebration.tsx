@@ -3,6 +3,7 @@ import CelebrationCard from "./CelebrationCard/CelebrationCard";
 import AddCelebration from "./AddCelebration/AddCelebration";
 import StatusFilter from "./StatusFilter/StatusFilter";
 import CategoryFilter from "./CatagoryFilter/CategoryFilter";
+import EmptyPlan from "../EmptyPlan/EmptyPlan";
 
 const Celebration = () => {
   const { celebrations } = useAppSelector((state) => state.celebration);
@@ -32,6 +33,7 @@ const Celebration = () => {
             <CelebrationCard key={idx} celebration={celebration} />
           ))}
       </div>
+      <div>{celebrations.length === 0 && <EmptyPlan />}</div>
     </div>
   );
 };
