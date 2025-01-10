@@ -19,7 +19,9 @@ const StatusFilter = () => {
         <Button
           key={idx}
           onClick={() => handleSelectStatus(btn)}
-          className={`${btn === btnName ? "bg-blue-500 text-white" : ""}`}
+          className={`${
+            btn === btnName ? "bg-green-500 text-white outline-none" : ""
+          }`}
         >
           {" "}
           {btn}{" "}

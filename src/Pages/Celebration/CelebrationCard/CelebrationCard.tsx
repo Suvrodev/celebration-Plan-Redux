@@ -3,13 +3,13 @@ import {
   deleteParty,
 } from "../../../redux/feature/celebrationSlice";
 import { useAppDispatch } from "../../../redux/hook";
-import { ICelebratin } from "../../../Types/Celebration";
+import { ICelebration } from "../../../Types/CelebrationType";
 import { Trash2 } from "lucide-react";
 import UpdateCelebration from "../UpdateCelebration/UpdateCelebration";
 import { ChangeEvent, useState } from "react";
 
 interface Iprops {
-  celebration: ICelebratin;
+  celebration: ICelebration;
 }
 const CelebrationCard = ({ celebration }: Iprops) => {
   //   console.log(celebration);

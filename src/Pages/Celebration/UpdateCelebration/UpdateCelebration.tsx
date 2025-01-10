@@ -1,9 +1,9 @@
 import { ChangeEvent, useState } from "react";
 import {
-  ICelebratin as ICelebraton,
-  TCategoty,
+  ICelebration as ICelebraton,
+  TCategory,
   TStatus,
-} from "../../../Types/Celebration";
+} from "../../../Types/CelebrationType";
 import { useAppDispatch } from "../../../redux/hook";
 import { Button, Modal } from "antd";
 import { updateParty } from "../../../redux/feature/celebrationSlice";
@@ -32,9 +32,9 @@ const UpdateCelebration = ({ celebration }: Iprops) => {
   };
 
   const statuses: TStatus[] = ["In-progress", "Pending", "Completed"];
-  const categories: TCategoty[] = ["Family Time", "BBQ Party", "Games"];
+  const categories: TCategory[] = ["Family Time", "BBQ Party", "Games"];
 
-  const [selectCategory, setSelectCategory] = useState<TCategoty | "">(
+  const [selectCategory, setSelectCategory] = useState<TCategory | "">(
     category
   );
   const [selectedStatus, setSelectedStatus] = useState<TStatus | "">(status);
@@ -44,7 +44,7 @@ const UpdateCelebration = ({ celebration }: Iprops) => {
   };
 
   const handleCategory = (event: ChangeEvent<HTMLSelectElement>) => {
-    setSelectCategory(event.target.value as TCategoty);
+    setSelectCategory(event.target.value as TCategory);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {

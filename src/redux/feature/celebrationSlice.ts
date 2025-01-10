@@ -1,14 +1,15 @@
 import { createSlice, nanoid, PayloadAction } from "@reduxjs/toolkit";
-import { ICelebratin } from "../../Types/Celebration";
+import { ICelebration } from "../../Types/CelebrationType";
+import { setLocalStorage } from "../../utilities/setLocalStorage";
 
 interface IInitialState {
-  celebrations: ICelebratin[];
+  celebrations: ICelebration[];
 }
 
 const getDataFromLocalStorage = localStorage.getItem("bung");
-let parties: ICelebratin[] | null = [];
+let parties: ICelebration[] | null = [];
 if (getDataFromLocalStorage) {
-  const data: ICelebratin[] = JSON.parse(getDataFromLocalStorage);
+  const data: ICelebration[] = JSON.parse(getDataFromLocalStorage);
   parties = [...data];
 } else {
   parties = null;
@@ -68,22 +69,18 @@ export const celebrationSlice = createSlice({
   name: "celebration",
   initialState,
   reducers: {
-    addParty: (state, action: PayloadAction<ICelebratin>) => {
+    addParty: (state, action: PayloadAction<ICelebration>) => {
       action.payload.id = nanoid();
-
       state.celebrations.push(action.payload);
-
-      const celebrationsString = JSON.stringify(state.celebrations);
-      localStorage.setItem("bung", celebrationsString);
+      setLocalStorage(state.celebrations);
     },
-    // getData: (state) => {},
     deleteParty: (state, action: PayloadAction<string>) => {
       console.log("delete id: ", action.payload);
       const data = state.celebrations.filter(
         (data) => data.id != action.payload
       );
-      const celebrationsString = JSON.stringify(data);
-      localStorage.setItem("bung", celebrationsString);
+
+      setLocalStorage(data);
       state.celebrations = [...data];
     },
     updateParty: (state, action) => {
@@ -98,8 +95,7 @@ export const celebrationSlice = createSlice({
         }
       });
 
-      const celebrationsString = JSON.stringify(state.celebrations);
-      localStorage.setItem("bung", celebrationsString);
+      setLocalStorage(state.celebrations);
     },
     completeTask: (state, action) => {
       const { id, checked } = action.payload;
@@ -111,14 +107,13 @@ export const celebrationSlice = createSlice({
     },
     statusFilterAction: (
       state,
-      action: PayloadAction<{ btn: string; celebrations: ICelebratin[] }>
+      action: PayloadAction<{ btn: string; celebrations: ICelebration[] }>
     ) => {
-      console.log("Actions: ", action.payload);
       const { btn } = action.payload;
-      console.log(btn);
       const allData: string | null = localStorage.getItem("bung");
+
       if (allData) {
-        const celebratData: ICelebratin[] = JSON.parse(allData);
+        const celebratData: ICelebration[] = JSON.parse(allData);
         if (btn === "All") {
           state.celebrations = [...celebratData];
         } else {

@@ -2,7 +2,11 @@ import { Button, Modal } from "antd";
 import { ChangeEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addParty } from "../../../redux/feature/celebrationSlice";
-import { ICelebratin, TCategoty, TStatus } from "../../../Types/Celebration";
+import {
+  ICelebration,
+  TCategory,
+  TStatus,
+} from "../../../Types/CelebrationType";
 
 const AddCelebration = () => {
   const dispatch = useDispatch();
@@ -22,9 +26,9 @@ const AddCelebration = () => {
   };
 
   const statuses: TStatus[] = ["In-progress", "Pending", "Completed"];
-  const categories: TCategoty[] = ["Family Time", "BBQ Party", "Games"];
+  const categories: TCategory[] = ["Family Time", "BBQ Party", "Games"];
 
-  const [selectCategory, setSelectCategory] = useState<TCategoty | "">("");
+  const [selectCategory, setSelectCategory] = useState<TCategory | "">("");
   const [selectedStatus, setSelectedStatus] = useState<TStatus | "">("");
 
   const handleStatus = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -32,7 +36,7 @@ const AddCelebration = () => {
   };
 
   const handleCategory = (event: ChangeEvent<HTMLSelectElement>) => {
-    setSelectCategory(event.target.value as TCategoty);
+    setSelectCategory(event.target.value as TCategory);
   };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -49,7 +53,7 @@ const AddCelebration = () => {
       status: selectedStatus,
     };
     console.log(formData);
-    dispatch(addParty(formData as ICelebratin));
+    dispatch(addParty(formData as ICelebration));
     Form.reset();
     handleOk();
   };
