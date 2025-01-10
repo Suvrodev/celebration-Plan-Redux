@@ -14,7 +14,7 @@ const StatusFilter = () => {
   };
 
   return (
-    <div className="flex gap-1 items-center">
+    <div className="flex flex-wrap gap-1 items-center">
       {buttons.map((btn, idx) => (
         <Button
           key={idx}

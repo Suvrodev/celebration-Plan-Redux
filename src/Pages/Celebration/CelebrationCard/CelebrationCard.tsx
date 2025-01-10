@@ -24,7 +24,7 @@ const CelebrationCard = ({ celebration }: Iprops) => {
     dispatch(completeTask(id));
   };
   return (
-    <div className="border p-2 rounded-md shadow-white shadow-md">
+    <div className="border p-2 rounded-md shadow-white shadow-md w-full md:w-auto">
       <div className="flex justify-between mb-4">
         <div className="flex items-center gap-2">
           <p

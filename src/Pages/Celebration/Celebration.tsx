@@ -11,13 +11,13 @@ const Celebration = () => {
 
   return (
     <div>
-      <div className="flex items-center justify-between my-4">
+      <div className="flex flex-col md:flex-row items-center justify-between my-4">
         <h1>BBQ Party</h1>
         <div>
           <div className="flex justify-end my-2">
             <CategoryFilter />
           </div>
-          <div className="flex gap-2 ">
+          <div className="flex flex-col md:flex-row gap-2 ">
             <div>
               <StatusFilter />
             </div>
@@ -27,7 +27,7 @@ const Celebration = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {celebrations.length > 0 &&
           celebrations.map((celebration, idx) => (
             <CelebrationCard key={idx} celebration={celebration} />

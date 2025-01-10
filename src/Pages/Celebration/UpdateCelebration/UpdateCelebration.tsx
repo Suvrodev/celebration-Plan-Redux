@@ -68,7 +68,7 @@ const UpdateCelebration = ({ celebration }: Iprops) => {
   };
 
   return (
-    <div className="bg-yellow-400">
+    <div className="">
       <Button type="primary" onClick={showModal}>
         <SquarePen />
       </Button>
