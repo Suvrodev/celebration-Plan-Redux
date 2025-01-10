@@ -100,8 +100,8 @@ export const celebrationSlice = createSlice({
       setLocalStorage(state.celebrations);
     },
     completeTask: (state, action) => {
-      const { id } = action.payload;
-      // console.log("Come Data: ", checked);
+      const id = action.payload;
+      console.log("Come Data: ", id);
       state.celebrations.forEach((data) => {
         if (data.id === id) {
           data.isCompleted = !data.isCompleted;
