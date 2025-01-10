@@ -54,8 +54,8 @@ const AddCelebration = () => {
     };
     console.log(formData);
     dispatch(addParty(formData as ICelebration));
-    Form.reset();
-    handleOk();
+    // Form.reset();
+    // handleOk();
   };
 
   return (

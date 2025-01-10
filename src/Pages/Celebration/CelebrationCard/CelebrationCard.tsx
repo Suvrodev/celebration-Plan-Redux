@@ -13,16 +13,16 @@ interface Iprops {
 }
 const CelebrationCard = ({ celebration }: Iprops) => {
   //   console.log(celebration);
-  const { id, title, description, deadline, category, status } = celebration;
+  const { id, title, description, deadline, category, status, isCompleted } =
+    celebration;
 
   const dispatch = useAppDispatch();
 
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(isCompleted);
   const handleTask = (event: ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
-    dispatch(completeTask({ id, checked }));
+    dispatch(completeTask(id));
   };
-  // console.log(checked);
   return (
     <div className="border p-2 rounded-md shadow-white shadow-md">
       <div className="flex justify-between mb-4">
@@ -36,7 +36,9 @@ const CelebrationCard = ({ celebration }: Iprops) => {
                 : "bg-red-500"
             }`}
           ></p>
-          <h1 className="font-bold text-xl ">{title}</h1>
+          <h1 className={`font-bold text-xl ${isCompleted && "line-through"} `}>
+            {title}
+          </h1>
           <span>({category})</span>
         </div>
         <div className="flex items-center gap-2">

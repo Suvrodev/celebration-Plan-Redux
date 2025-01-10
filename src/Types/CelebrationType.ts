@@ -5,6 +5,7 @@ export interface ICelebration {
   deadline: string;
   status: TStatus;
   category: TCategory;
+  isCompleted: boolean;
 }
 
 export type TStatus = "In-progress" | "Pending" | "Completed";

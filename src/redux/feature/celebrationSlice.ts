@@ -71,6 +71,7 @@ export const celebrationSlice = createSlice({
   reducers: {
     addParty: (state, action: PayloadAction<ICelebration>) => {
       action.payload.id = nanoid();
+      action.payload.isCompleted = false;
       state.celebrations.push(action.payload);
       setLocalStorage(state.celebrations);
     },
@@ -98,12 +99,14 @@ export const celebrationSlice = createSlice({
       setLocalStorage(state.celebrations);
     },
     completeTask: (state, action) => {
-      const { id, checked } = action.payload;
+      const { id } = action.payload;
+      // console.log("Come Data: ", checked);
       state.celebrations.forEach((data) => {
         if (data.id === id) {
-          data.status = checked;
+          data.isCompleted = !data.isCompleted;
         }
       });
+      setLocalStorage(state.celebrations);
     },
     statusFilterAction: (
       state,
