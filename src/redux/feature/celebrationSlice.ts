@@ -76,15 +76,7 @@ export const celebrationSlice = createSlice({
       state.celebrations.push(action.payload);
       setLocalStorage(state.celebrations);
     },
-    deleteParty: (state, action: PayloadAction<string>) => {
-      console.log("delete id: ", action.payload);
-      const data = state.celebrations.filter(
-        (data) => data.id != action.payload
-      );
 
-      setLocalStorage(data);
-      state.celebrations = [...data];
-    },
     updateParty: (state, action) => {
       const { id, formData } = action.payload;
       state.celebrations.forEach((data) => {
@@ -98,6 +90,15 @@ export const celebrationSlice = createSlice({
       });
 
       setLocalStorage(state.celebrations);
+    },
+    deleteParty: (state, action: PayloadAction<string>) => {
+      console.log("delete id: ", action.payload);
+      const data = state.celebrations.filter(
+        (data) => data.id != action.payload
+      );
+
+      setLocalStorage(data);
+      state.celebrations = [...data];
     },
     completeTask: (state, action) => {
       const id = action.payload;
